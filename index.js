@@ -1,8 +1,8 @@
 function cmbFormSignupXhr() {
   var
-  sa = require('visionmedia-superagent'),
-  serialize = require('JayceTDE-serialize'),
-  ev = require('component-event');
+  sa = require('superagent'),
+  serialize = require('serialize'),
+  ev = require('event');
   
   var
   form = document.querySelector('.cm-form-signup'),

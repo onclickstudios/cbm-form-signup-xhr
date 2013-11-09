@@ -1,0 +1,14 @@
+{
+  "name": "cmb-form-signup-xhr",
+  "repo": "onclickstudios/cmb-form-signup-xhr",
+  "description": "Behavior layer for cm-form-signup",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}

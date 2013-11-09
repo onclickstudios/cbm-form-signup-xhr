@@ -4,7 +4,11 @@
   "description": "Behavior layer for cm-form-signup",
   "version": "0.0.1",
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "visionmedia/superagent":"*",
+    "JayceTDE/serialize":"*",
+    "component/event":"*"
+  },
   "development": {},
   "license": "MIT",
   "main": "index.js",

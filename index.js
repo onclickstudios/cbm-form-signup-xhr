@@ -1,4 +1,4 @@
-function cmbFormSignupXhr() {
+function cbmFormSignupXhr() {
   var
   sa = require('superagent'),
   serialize = require('serialize'),
@@ -23,5 +23,5 @@ function cmbFormSignupXhr() {
   });
 };
 
-module.exports = cmbFormSignupXhr;
+module.exports = cbmFormSignupXhr;
 

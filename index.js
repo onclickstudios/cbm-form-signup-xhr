@@ -1,12 +1,14 @@
 function cbmFormSignupXhr() {
   var
+  $ = require('query'),
   sa = require('superagent'),
   serialize = require('serialize'),
   ev = require('event');
   
   var
-  form = document.querySelector('.cm-form-signup'),
-  span = document.getElementById('signup-span');
+  form = $('.cm-form-signup'),
+  usernameInput = $('input[name=username]'),
+  span = $('#signup-span');
   
   ev.bind(form, 'submit', function(e) {
     e.preventDefault();
@@ -21,7 +23,18 @@ function cbmFormSignupXhr() {
       : span.innerHTML = JSON.parse(s.text);
     });
   });
+  
+  ev.bind(usernameInput, 'keyup', function(e) {
+    var val;
+    (val = usernameInput.value).length < 2 ? return false
+    : sa.get('/users/exists?username=' + val)
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Accept','application/json')
+      .end(function(e,s) {
+        e ? return false
+        : console.log(JSON.parse(s.text));
+    });
+  });
 };
 
 module.exports = cbmFormSignupXhr;
-

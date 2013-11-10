@@ -26,13 +26,13 @@ function cbmFormSignupXhr() {
   
   ev.bind(usernameInput, 'keyup', function(e) {
     var val = usernameInput.value;
-    val.length < 3 ? false //lalalala
+    val.length < 3 ? false
     : sa.get('/users/exists?username=' + val)
       .set('X-Requested-With', 'XMLHttpRequest')
       .set('Accept','application/json')
       .end(function(e,s) {
         e ? return false
-        : console.log(JSON.parse(s.text));
+        : console.log(s.text);
     });
   });
 };

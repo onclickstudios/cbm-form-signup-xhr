@@ -1,6 +1,6 @@
 function cbmFormSignupXhr() {
   var
-  $ = require('query-zest'),
+  $ = require('query'),
   sa = require('superagent'),
   serialize = require('serialize'),
   ev = require('event');

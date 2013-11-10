@@ -25,8 +25,8 @@ function cbmFormSignupXhr() {
   });
   
   ev.bind(usernameInput, 'keyup', function(e) {
-    var val;
-    return (val = usernameInput.value).length < 2 ? false
+    var val = usernameInput.value;
+    val.length < 3 ? false //lalalala
     : sa.get('/users/exists?username=' + val)
       .set('X-Requested-With', 'XMLHttpRequest')
       .set('Accept','application/json')

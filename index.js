@@ -19,6 +19,7 @@ function cbmFormSignupXhr(context) {
       .is('min', 4, 'must be 4+ characters')
     .invalid(function(view,msg) {
       span.innerHTML = msg;
+      console.log(view);
     });
   
   ev.bind(form, 'submit', function(e) {

@@ -38,7 +38,7 @@ function cbmFormSignupXhr(context) {
             : cb(false)
           });
         })();
-      });
+      }, 'username exists');
   
   ev.bind(form, 'submit', function(e) {
     e.preventDefault();

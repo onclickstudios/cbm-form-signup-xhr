@@ -1,5 +1,5 @@
 
-# cmb-form-signup-xhr
+# cbm-form-signup-xhr
 
   Behavior layer for cm-form-signup
 
@@ -7,7 +7,7 @@
 
   Install with [component(1)](http://component.io):
 
-    $ component install onclickstudios/cmb-form-signup-xhr
+    $ component install onclickstudios/cbm-form-signup-xhr
 
 ## API
 

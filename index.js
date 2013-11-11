@@ -7,7 +7,7 @@ function cbmFormSignupXhr() {
   
   var
   form = $('.cm-form-signup'),
-  usernameInput = $('input[name=username]'),
+  usernameInput = $('input[name=username]', form),
   span = $('#signup-span');
   
   ev.bind(form, 'submit', function(e) {
@@ -24,16 +24,20 @@ function cbmFormSignupXhr() {
     });
   });
   
-  ev.bind(usernameInput, 'keyup', function(e) {
-    var val = usernameInput.value;
-    return val.length < 3 ? false
-    : sa.get('/users/exists?username=' + val)
-      .set('X-Requested-With', 'XMLHttpRequest')
-      .set('Accept','application/json')
-      .end(function(e,s) {
-        e ? false
-        : console.log(s.text);
-    });
+  var usernameKeyupTo;
+  ev.bind(usernameInput,'keyup', function(e) {
+    clearTimeout(usernameKeyupTo);
+    to = setTimeout(function() {
+      var val = usernameInput.value;
+      sa.get('/users/exists?username=' + val)
+        .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Accept','application/json')
+        .end(function(e,s) {
+          e ? false
+          : !JSON.parse(s.text) ? span.innerHTML = ''
+          : span.innerHTML = 'exists';
+      });
+    }, 500);
   });
 };
 

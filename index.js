@@ -8,8 +8,7 @@ function cbmFormSignupXhr(context) {
   
   var
   form = $('form.cm-form-signup'),
-  usernameInput = $('input[name=username]', form),
-  badUsername;
+  usernameInput = $('input[name=username]', form);
   
   validate(form)
     .on('blur')
@@ -26,7 +25,6 @@ function cbmFormSignupXhr(context) {
       }, 'passwords don\'t match')
     .field('username')
       .is(function(val,cb) {
-        badUsername = val;
         return !val ? false
         : (function() {
           return sa.get(context.existsURI + '?username=' + val)
@@ -38,7 +36,7 @@ function cbmFormSignupXhr(context) {
             : cb(false);
           });
         })();
-      }, context.existsMessage || 'Username ' + badUsername + ' already exists')
+      }, context.existsMessage || 'Username already exists')
   ;
   
   

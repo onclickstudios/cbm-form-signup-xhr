@@ -38,7 +38,6 @@ function cbmFormSignupXhr(context) {
                 : cb(false)
               });
             })();
-          }, 500);
       });
   
   ev.bind(form, 'submit', function(e) {

@@ -62,7 +62,7 @@ function cbmFormSignupXhr(context) {
         })()
         : location.href = redirect_uri;
       })()
-      : false
+      : alert('unknown failure');
     });
   });
   

@@ -31,7 +31,7 @@ function cbmFormSignupXhr(context) {
                 : true && (!!(span.innerHTML = '') || true) && false;
               });
             })();
-      });
+      }, 'username already exists');
   
   ev.bind(form, 'submit', function(e) {
     e.preventDefault();

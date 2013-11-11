@@ -6,7 +6,7 @@ function cbmFormSignupXhr(context) {
   ev = require('event');
   
   var
-  form = $('.cm-form-signup'),
+  form = $('form.cm-form-signup'),
   usernameInput = $('input[name=username]', form),
   span = $('#cm-form-signup-info-span');
   
@@ -24,15 +24,15 @@ function cbmFormSignupXhr(context) {
     });
   });
   
-  var usernameKeyupTo;
+  var usernameKeyupTo, val;
   ev.bind(usernameInput,'keyup', function(e) {
     clearTimeout(usernameKeyupTo);
     to = setTimeout(function() {
-      var val = usernameInput.value;
-      sa.get(context.existsURI + '?username=' + val)
-      .set('X-Requested-With', 'XMLHttpRequest')
-      .set('Accept','application/json')
-      .end(function(e,s) {
+      return val === usernameInput.value ? false
+      : sa.get(context.existsURI + '?username=' + val)
+        .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Accept','application/json')
+        .end(function(e,s) {
           e ? false
           : !JSON.parse(s.text) ? span.innerHTML = ''
           : span.innerHTML = context.existsMessage || 'Username ' + val + ' already exists';

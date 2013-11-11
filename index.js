@@ -14,24 +14,32 @@ function cbmFormSignupXhr(context) {
   validate(form)
     .on('blur')
     .field('email')
+      .is('required')
       .is('email', 'invalid email address')
     .field('password')
+      .is('required')
       .is('min', 4, 'must be 4+ characters')
-    .field('username')
+    .field('confirm')
+      .is('required')
       .is(function(val) {
+        return val === $('input[name=password', form).value;
+      }, 'passwords don\'t match')
+    .field('username')
+      .is(function(cb) {
         return val === usernameInput.value ? false
             : (function() {
               val = usernameInput.value;
-              sa.get(context.existsURI + '?username=' + val)
+              return sa.get(context.existsURI + '?username=' + val)
               .set('X-Requested-With', 'XMLHttpRequest')
               .set('Accept','application/json')
               .end(function(e,s) {
                 e ? false
-                : !JSON.parse(s.text) ? span.innerHTML = ''
-                : true && (!!(span.innerHTML = '') || true) && false;
+                : cb(true)
+                : cb(false)
               });
             })();
-      }, 'username already exists');
+          }, 500);
+      });
   
   ev.bind(form, 'submit', function(e) {
     e.preventDefault();
@@ -47,24 +55,24 @@ function cbmFormSignupXhr(context) {
     });
   });
   
-  var usernameKeyupTo, val;
-  ev.bind(usernameInput,'keyup', function(e) {
-    clearTimeout(usernameKeyupTo);
-    to = setTimeout(function() {
-      return val === usernameInput.value ? false
-      : (function() {
-        val = usernameInput.value;
-        sa.get(context.existsURI + '?username=' + val)
-        .set('X-Requested-With', 'XMLHttpRequest')
-        .set('Accept','application/json')
-        .end(function(e,s) {
-          e ? false
-          : !JSON.parse(s.text) ? span.innerHTML = ''
-          : span.innerHTML = context.existsMessage || 'Username ' + val + ' already exists';
-        });
-      })();
-    }, 500);
-  });
+//  var usernameKeyupTo, val;
+//  ev.bind(usernameInput,'keyup', function(e) {
+//    clearTimeout(usernameKeyupTo);
+//    to = setTimeout(function() {
+//      return val === usernameInput.value ? false
+//      : (function() {
+//        val = usernameInput.value;
+//        sa.get(context.existsURI + '?username=' + val)
+//        .set('X-Requested-With', 'XMLHttpRequest')
+//        .set('Accept','application/json')
+//        .end(function(e,s) {
+//          e ? false
+//          : !JSON.parse(s.text) ? span.innerHTML = ''
+//          : span.innerHTML = context.existsMessage || 'Username ' + val + ' already exists';
+//        });
+//      })();
+//    }, 500);
+//  });
   
 };
 

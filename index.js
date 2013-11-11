@@ -53,7 +53,7 @@ function cbmFormSignupXhr(context) {
       e ? form.reset()
       : s.statusType === 5 ? alert('server error')
       : s.status === 409 ? alert('database conflict')
-      : s.status === 200 ? (function() {
+      : s.status === 201 ? (function() {
         form.reset();
         location.href = '/';
       })()

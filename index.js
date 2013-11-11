@@ -8,8 +8,7 @@ function cbmFormSignupXhr(context) {
   
   var
   form = $('form.cm-form-signup'),
-  usernameInput = $('input[name=username]', form),
-  span = $('#cm-form-signup-info-span');
+  usernameInput = $('input[name=username]', form);
   
   validate(form)
     .on('blur')
@@ -34,10 +33,11 @@ function cbmFormSignupXhr(context) {
           .end(function(e,s) {
             e ? cb(e, false)
             : !JSON.parse(s.text) ? cb(true)
-            : cb(false);
+            : cb(false, 'not happy');
           });
         })();
-      }, context.existsMessage || 'Username ' + usernameInput.value + ' already exists');
+      }, context.existsMessage || 'Username ' + usernameInput.value + ' already exists')
+  ;
   
   
   ev.bind(form, 'submit', function(e) {

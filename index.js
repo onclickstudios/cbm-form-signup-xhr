@@ -4,7 +4,8 @@ function cbmFormSignupXhr(context) {
   sa = require('superagent'),
   serialize = require('serialize'),
   ev = require('event'),
-  validate = require('validate-form');
+  validate = require('validate-form'),
+  qs = require('querystring');
   
   var
   form = $('form.cm-form-signup'),
@@ -54,8 +55,12 @@ function cbmFormSignupXhr(context) {
       : s.statusType === 5 ? alert('server error')
       : s.status === 409 ? alert('database conflict')
       : s.status === 201 ? (function() {
-        form.reset();
-        location.href = '/';
+        var redirect_uri;
+        !(redirect_uri = qs.parse(location.search.split('?')[1]).redirect_uri) ? (function() {
+          alert('success');
+          form.reset();
+        })()
+        : location.href = redirect_uri;
       })()
       : false
     });

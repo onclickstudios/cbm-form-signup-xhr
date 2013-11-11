@@ -9,7 +9,8 @@
     "JayceTDE/serialize":"*",
     "component/event":"*",
     "component/query":"*",
-    "segmentio/validate-form":"*"
+    "segmentio/validate-form":"*",
+    "component/querystring":"*"
   },
   "development": {},
   "license": "MIT",

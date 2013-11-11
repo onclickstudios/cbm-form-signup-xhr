@@ -27,13 +27,14 @@ function cbmFormSignupXhr(context) {
       .is(function(val,cb) {
         return !val ? false
         : (function() {
+          console.log(usernameInput.value);
           return sa.get(context.existsURI + '?username=' + val)
           .set('X-Requested-With', 'XMLHttpRequest')
           .set('Accept','application/json')
           .end(function(e,s) {
             e ? cb(e, false)
             : !JSON.parse(s.text) ? cb(true)
-            : cb(false, 'not happy');
+            : cb(false);
           });
         })();
       }, context.existsMessage || 'Username ' + usernameInput.value + ' already exists')

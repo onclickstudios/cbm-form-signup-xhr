@@ -25,10 +25,9 @@ function cbmFormSignupXhr(context) {
         return val === $('input[name=password', form).value;
       }, 'passwords don\'t match')
     .field('username')
-      .is(function(cb) {
-        return val === usernameInput.value ? false
+      .is(function(val) {
+        return val ? false
         : (function() {
-          val = usernameInput.value;
           return sa.get(context.existsURI + '?username=' + val)
           .set('X-Requested-With', 'XMLHttpRequest')
           .set('Accept','application/json')

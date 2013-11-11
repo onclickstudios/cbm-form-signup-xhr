@@ -37,7 +37,8 @@ function cbmFormSignupXhr(context) {
             : cb(false);
           });
         })();
-      }, 'username exists');
+      }, context.existsMessage || 'Username ' + usernameInput.value + ' already exists');
+  
   
   ev.bind(form, 'submit', function(e) {
     e.preventDefault();
@@ -52,25 +53,6 @@ function cbmFormSignupXhr(context) {
       : span.innerHTML = JSON.parse(s.text);
     });
   });
-  
-//  var usernameKeyupTo, val;
-//  ev.bind(usernameInput,'keyup', function(e) {
-//    clearTimeout(usernameKeyupTo);
-//    to = setTimeout(function() {
-//      return val === usernameInput.value ? false
-//      : (function() {
-//        val = usernameInput.value;
-//        sa.get(context.existsURI + '?username=' + val)
-//        .set('X-Requested-With', 'XMLHttpRequest')
-//        .set('Accept','application/json')
-//        .end(function(e,s) {
-//          e ? false
-//          : !JSON.parse(s.text) ? span.innerHTML = ''
-//          : span.innerHTML = context.existsMessage || 'Username ' + val + ' already exists';
-//        });
-//      })();
-//    }, 500);
-//  });
   
 };
 

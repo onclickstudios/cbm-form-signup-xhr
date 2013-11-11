@@ -8,7 +8,8 @@
     "visionmedia/superagent":"*",
     "JayceTDE/serialize":"*",
     "component/event":"*",
-    "component/query":"*"
+    "component/query":"*",
+    "segmentio/validate-form":"*"
   },
   "development": {},
   "license": "MIT",

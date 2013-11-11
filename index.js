@@ -3,12 +3,18 @@ function cbmFormSignupXhr(context) {
   $ = require('query'),
   sa = require('superagent'),
   serialize = require('serialize'),
-  ev = require('event');
+  ev = require('event'),
+  validate = require('validate-form');
   
   var
   form = $('form.cm-form-signup'),
   usernameInput = $('input[name=username]', form),
   span = $('#cm-form-signup-info-span');
+  
+  validate(form)
+    .on('blur')
+    .field('email')
+    .is('email', 'invalid email address');
   
   ev.bind(form, 'submit', function(e) {
     e.preventDefault();

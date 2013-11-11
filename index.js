@@ -27,17 +27,17 @@ function cbmFormSignupXhr(context) {
     .field('username')
       .is(function(cb) {
         return val === usernameInput.value ? false
-            : (function() {
-              val = usernameInput.value;
-              return sa.get(context.existsURI + '?username=' + val)
-              .set('X-Requested-With', 'XMLHttpRequest')
-              .set('Accept','application/json')
-              .end(function(e,s) {
-                e ? false
-                : cb(true)
-                : cb(false)
-              });
-            })();
+        : (function() {
+          val = usernameInput.value;
+          return sa.get(context.existsURI + '?username=' + val)
+          .set('X-Requested-With', 'XMLHttpRequest')
+          .set('Accept','application/json')
+          .end(function(e,s) {
+            e ? false
+            : !JSON.parse(s.text) ? cb(true)
+            : cb(false)
+          });
+        })();
       });
   
   ev.bind(form, 'submit', function(e) {

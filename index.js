@@ -8,7 +8,7 @@ function cbmFormSignupXhr(context) {
   var
   form = $('.cm-form-signup'),
   usernameInput = $('input[name=username]', form),
-  span = $('#signup-span');
+  span = $('#cm-form-signup-info-span');
   
   ev.bind(form, 'submit', function(e) {
     e.preventDefault();
@@ -29,16 +29,17 @@ function cbmFormSignupXhr(context) {
     clearTimeout(usernameKeyupTo);
     to = setTimeout(function() {
       var val = usernameInput.value;
-      sa.get(context.existsURI + val)
-        .set('X-Requested-With', 'XMLHttpRequest')
-        .set('Accept','application/json')
-        .end(function(e,s) {
+      sa.get(context.existsURI + '?username=' + val)
+      .set('X-Requested-With', 'XMLHttpRequest')
+      .set('Accept','application/json')
+      .end(function(e,s) {
           e ? false
           : !JSON.parse(s.text) ? span.innerHTML = ''
-          : span.innerHTML = context.existsMessage || 'already exists';
+          : span.innerHTML = context.existsMessage || 'Username ' + val + ' already exists';
       });
     }, 500);
   });
+  
 };
 
 module.exports = cbmFormSignupXhr;

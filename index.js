@@ -17,10 +17,21 @@ function cbmFormSignupXhr(context) {
       .is('email', 'invalid email address')
     .field('password')
       .is('min', 4, 'must be 4+ characters')
-    .invalid(function(view,msg) {
-      span.innerHTML = msg;
-      console.log(view);
-    });
+    .field('username')
+      .is(function(val) {
+        return val === usernameInput.value ? false
+            : (function() {
+              val = usernameInput.value;
+              sa.get(context.existsURI + '?username=' + val)
+              .set('X-Requested-With', 'XMLHttpRequest')
+              .set('Accept','application/json')
+              .end(function(e,s) {
+                e ? false
+                : !JSON.parse(s.text) ? span.innerHTML = ''
+                : !!(span.innerHTML = context.existsMessage || 'Username ' + val + ' already exists');
+              });
+            })();
+      });
   
   ev.bind(form, 'submit', function(e) {
     e.preventDefault();

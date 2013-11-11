@@ -13,17 +13,18 @@ function cbmFormSignupXhr(context) {
   validate(form)
     .on('blur')
     .field('email')
-      .is('required')
+      .is('required','required')
       .is('email', 'invalid email address')
     .field('password')
-      .is('required')
+      .is('required','required')
       .is('min', 4, 'must be 4+ characters')
     .field('confirm')
-      .is('required')
+      .is('required','required')
       .is(function(val) {
         return val === $('input[name=password', form).value;
       }, 'passwords don\'t match')
     .field('username')
+      .is('required','required')
       .is(function(val,cb) {
         return !val ? false
         : (function() {
@@ -36,7 +37,7 @@ function cbmFormSignupXhr(context) {
             : cb(false);
           });
         })();
-      }, context.existsMessage || 'Username already exists')
+      }, context.existsMessage || 'already exists')
   ;
   
   

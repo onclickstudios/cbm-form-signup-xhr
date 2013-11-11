@@ -16,7 +16,10 @@ function cbmFormSignupXhr(context) {
     .field('email')
       .is('email', 'invalid email address')
     .field('password')
-      .is('min', 4, 'must be 4+ characters');
+      .is('min', 4, 'must be 4+ characters')
+    .invalid(function(view,msg) {
+      span.innerHTML = msg;
+    });
   
   ev.bind(form, 'submit', function(e) {
     e.preventDefault();

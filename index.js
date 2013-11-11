@@ -28,7 +28,7 @@ function cbmFormSignupXhr(context) {
       .is(function(val,cb) {
         return !val ? false
         : (function() {
-          badUsername = usernameInput.value;
+          badUsername = val;
           return sa.get(context.existsURI + '?username=' + val)
           .set('X-Requested-With', 'XMLHttpRequest')
           .set('Accept','application/json')

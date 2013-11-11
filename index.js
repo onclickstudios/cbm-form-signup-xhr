@@ -1,4 +1,4 @@
-function cbmFormSignupXhr() {
+function cbmFormSignupXhr(context) {
   var
   $ = require('query'),
   sa = require('superagent'),
@@ -35,7 +35,7 @@ function cbmFormSignupXhr() {
         .end(function(e,s) {
           e ? false
           : !JSON.parse(s.text) ? span.innerHTML = ''
-          : span.innerHTML = 'exists';
+          : span.innerHTML = context.existsMessage || 'already exists';
       });
     }, 500);
   });

@@ -50,8 +50,14 @@ function cbmFormSignupXhr(context) {
     .set('Accept', 'application/json')
     .set('X-Requested-With','XMLHttpRequest')
     .end(function(e,s) {
-      e ? span.innerHTML = e
-      : console.log(s);
+      e ? form.reset()
+      : s.statusType === 5 ? alert('server error')
+      : s.status === 409 ? alert('database conflict')
+      : s.status === 200 ? (function() {
+        form.reset();
+        location.href = '/';
+      })()
+      : false
     });
   });
   

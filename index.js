@@ -51,7 +51,7 @@ function cbmFormSignupXhr(context) {
     .set('X-Requested-With','XMLHttpRequest')
     .end(function(e,s) {
       e ? span.innerHTML = e
-      : span.innerHTML = JSON.parse(s.text);
+      : console.log(s);
     });
   });
   

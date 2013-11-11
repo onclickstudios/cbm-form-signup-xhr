@@ -29,7 +29,8 @@ function cbmFormSignupXhr(context) {
     clearTimeout(usernameKeyupTo);
     to = setTimeout(function() {
       return val === usernameInput.value ? false
-      : sa.get(context.existsURI + '?username=' + val)
+      : (val = usernameInput.value) &&
+        sa.get(context.existsURI + '?username=' + val)
         .set('X-Requested-With', 'XMLHttpRequest')
         .set('Accept','application/json')
         .end(function(e,s) {

@@ -26,7 +26,7 @@ function cbmFormSignupXhr(context) {
       }, 'passwords don\'t match')
     .field('username')
       .is(function(val) {
-        return val ? false
+        return !val ? false
         : (function() {
           return sa.get(context.existsURI + '?username=' + val)
           .set('X-Requested-With', 'XMLHttpRequest')

@@ -29,7 +29,8 @@ function cbmFormSignupXhr(context) {
     clearTimeout(usernameKeyupTo);
     to = setTimeout(function() {
       return val === usernameInput.value ? false
-      : (val = usernameInput.value) &&
+      : (function() {
+        val = usernameInput.value;
         sa.get(context.existsURI + '?username=' + val)
         .set('X-Requested-With', 'XMLHttpRequest')
         .set('Accept','application/json')
@@ -37,7 +38,8 @@ function cbmFormSignupXhr(context) {
           e ? false
           : !JSON.parse(s.text) ? span.innerHTML = ''
           : span.innerHTML = context.existsMessage || 'Username ' + val + ' already exists';
-      });
+        });
+      })();
     }, 500);
   });
   

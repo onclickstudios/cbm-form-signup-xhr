@@ -25,7 +25,7 @@ function cbmFormSignupXhr(context) {
         return val === $('input[name=password', form).value;
       }, 'passwords don\'t match')
     .field('username')
-      .is(function(val) {
+      .is(function(val,cb) {
         return !val ? false
         : (function() {
           return sa.get(context.existsURI + '?username=' + val)
@@ -33,8 +33,8 @@ function cbmFormSignupXhr(context) {
           .set('Accept','application/json')
           .end(function(e,s) {
             e ? false
-            : !JSON.parse(s.text) ? cb(true)
-            : cb(false) || console.log(cb)
+            : !JSON.parse(s.text) ? true
+            : false || console.log(cb)
           });
         })();
       }, 'username exists');

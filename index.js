@@ -32,9 +32,9 @@ function cbmFormSignupXhr(context) {
           .set('X-Requested-With', 'XMLHttpRequest')
           .set('Accept','application/json')
           .end(function(e,s) {
-            e ? false
-            : !JSON.parse(s.text) ? true
-            : false || console.log(cb)
+            e ? cb(e, false)
+            : !JSON.parse(s.text) ? cb(null, true)
+            : cb(null, false);
           });
         })();
       }, 'username exists');

@@ -35,7 +35,7 @@ function cbmFormSignupXhr(context) {
           .end(function(e,s) {
             e ? false
             : !JSON.parse(s.text) ? cb(true)
-            : cb(false)
+            : cb(false) || console.log(cb)
           });
         })();
       }, 'username exists');

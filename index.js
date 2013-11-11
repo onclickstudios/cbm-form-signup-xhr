@@ -8,7 +8,8 @@ function cbmFormSignupXhr(context) {
   
   var
   form = $('form.cm-form-signup'),
-  usernameInput = $('input[name=username]', form);
+  usernameInput = $('input[name=username]', form),
+  badUsername;
   
   validate(form)
     .on('blur')
@@ -27,7 +28,7 @@ function cbmFormSignupXhr(context) {
       .is(function(val,cb) {
         return !val ? false
         : (function() {
-          console.log(usernameInput.value);
+          badUsername = usernameInput.value;
           return sa.get(context.existsURI + '?username=' + val)
           .set('X-Requested-With', 'XMLHttpRequest')
           .set('Accept','application/json')
@@ -37,7 +38,7 @@ function cbmFormSignupXhr(context) {
             : cb(false);
           });
         })();
-      }, context.existsMessage || 'Username ' + usernameInput.value + ' already exists')
+      }, context.existsMessage || 'Username ' + badUsername + ' already exists')
   ;
   
   

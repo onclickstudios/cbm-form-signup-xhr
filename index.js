@@ -28,7 +28,7 @@ function cbmFormSignupXhr(context) {
               .end(function(e,s) {
                 e ? false
                 : !JSON.parse(s.text) ? span.innerHTML = ''
-                : !!(span.innerHTML = context.existsMessage || 'Username ' + val + ' already exists');
+                : true && (!!(span.innerHTML = '') || true) && false;
               });
             })();
       });

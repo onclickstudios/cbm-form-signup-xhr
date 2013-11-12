@@ -12,7 +12,7 @@ function cbmFormSignupXhr(context) {
   usernameInput = $('input[name=username]', form);
   
   validate(form)
-//    .on('blur')
+    .on('blur')
     .field('email')
       .is('required','required')
       .is('email', 'invalid email address')
@@ -25,7 +25,6 @@ function cbmFormSignupXhr(context) {
         return val === $('input[name=password', form).value;
       }, 'passwords don\'t match')
     .field('username')
-      .on('blur')
       .is('required','required')
       .is(function(val,cb) {
         return !val ? false
